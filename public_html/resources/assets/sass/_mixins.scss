@@ -1,0 +1,334 @@
+// main: ./style.scss
+
+@mixin _make-shadow($color: rgb(0, 0, 0), $alpha: .2) {
+  -webkit-box-shadow: 0 0 3px 2px rgba(red($color), green($color), blue($color), $alpha);
+  -moz-box-shadow: 0 0 3px 2px rgba(red($color), green($color), blue($color), $alpha);
+  box-shadow: 0 0 3px 2px rgba(red($color), green($color), blue($color), $alpha);
+}
+
+
+@mixin _make-width($abbrev) {
+  $abbrev100x: x100($abbrev);
+  $size: #{$abbrev100x}px;
+  .w-#{$abbrev100x}px { width: $size; }
+
+  @each $breakpoint, $breakpoint-width in $grid-breakpoints {
+    $breakpoint: quote(unquote($breakpoint));
+
+    @if $breakpoint == xs {
+      @include media-breakpoint-down(xs) {
+        .w-#{$breakpoint}-#{$abbrev100x}px { width: $size; }
+      }
+    } @else {
+      @include media-breakpoint-up($breakpoint) {
+        .w-#{$breakpoint}-#{$abbrev100x}px { width: $size; }
+      }
+    }
+  }
+}
+
+@mixin _make-subwidth($abbrev, $parent) {
+  $abbrev10x: x10($abbrev);
+  $abbrev100x: x100($parent);
+  $size10x: #{$abbrev10x}px;
+  $size: #{($abbrev100x + $abbrev10x)}px;
+  .w-#{$abbrev10x}px { width: $size10x; }
+  .w-#{($abbrev100x + $abbrev10x)}px { width: $size; }
+
+  @each $breakpoint, $breakpoint-width in $grid-breakpoints {
+    $breakpoint: quote(unquote($breakpoint));
+
+    @if $breakpoint == xs {
+      @include media-breakpoint-down(xs) {
+        .w-#{$breakpoint}-#{$abbrev10x}px { width: $size10x; }
+        .w-#{$breakpoint}-#{($abbrev100x + $abbrev10x)}px { width: $size; }
+      }
+    } @else {
+      @include media-breakpoint-up($breakpoint) {
+        .w-#{$breakpoint}-#{$abbrev10x}px { width: $size10x; }
+        .w-#{$breakpoint}-#{($abbrev100x + $abbrev10x)}px { width: $size; }
+      }
+    }
+  }
+}
+
+
+@mixin _make-height($abbrev) {
+  $abbrev100x: x100($abbrev);
+  $size: #{$abbrev100x}px;
+  .h-#{$abbrev100x}px { height: $size; }
+
+  @each $breakpoint, $breakpoint-width in $grid-breakpoints {
+    $breakpoint: quote(unquote($breakpoint));
+
+    @if $breakpoint == xs {
+      @include media-breakpoint-down(xs) {
+        .h-#{$breakpoint}-#{$abbrev100x}px { height: $size; }
+      }
+    } @else {
+      @include media-breakpoint-up($breakpoint) {
+        .h-#{$breakpoint}-#{$abbrev100x}px { height: $size; }
+      }
+    }
+  }
+}
+
+@mixin _make-subheight($abbrev, $parent) {
+  $abbrev10x: x10($abbrev);
+  $abbrev100x: x100($parent);
+  $size10x: #{$abbrev10x}px;
+  $size: #{($abbrev100x + $abbrev10x)}px;
+  .h-#{$abbrev10x}px { height: $size10x; }
+  .h-#{($abbrev100x + $abbrev10x)}px { height: $size; }
+
+  @each $breakpoint, $breakpoint-width in $grid-breakpoints {
+    $breakpoint: quote(unquote($breakpoint));
+
+    @if $breakpoint == xs {
+      @include media-breakpoint-down(xs) {
+        .h-#{$breakpoint}-#{$abbrev10x}px { height: $size10x; }
+        .h-#{$breakpoint}-#{($abbrev100x + $abbrev10x)}px { height: $size; }
+      }
+    } @else {
+      @include media-breakpoint-up($breakpoint) {
+        .h-#{$breakpoint}-#{$abbrev10x}px { height: $size10x; }
+        .h-#{$breakpoint}-#{($abbrev100x + $abbrev10x)}px { height: $size; }
+      }
+    }
+  }
+}
+
+@mixin _make-positions($abbrev) {
+  $abbrev10x: x10($abbrev);
+  $size: #{$abbrev10x}px;
+
+  @each $key, $position in $_positions {
+    .#{$position}-#{$abbrev10x},
+    .#{$position}-#{$abbrev10x}px { #{$position}: $size !important; }
+
+    @each $breakpoint, $breakpoint-width in $grid-breakpoints {
+      $breakpoint: quote(unquote($breakpoint));
+
+      @if $breakpoint == xs {
+        @include media-breakpoint-down(xs) {
+          .#{$position}-#{$breakpoint}-#{$abbrev10x},
+          .#{$position}-#{$breakpoint}-#{$abbrev10x}px { #{$position}: $size !important; }
+        }
+      } @else {
+        @include media-breakpoint-up($breakpoint) {
+          .#{$position}-#{$breakpoint}-#{$abbrev10x},
+          .#{$position}-#{$breakpoint}-#{$abbrev10x}px { #{$position}: $size !important; }
+        }
+      }
+    }
+  }
+}
+
+
+@mixin _make-gd($color1, $color2, $position: top, $transparent: true) {
+  $deg: 0deg !default;
+
+  @if $position == "right" {
+    $deg: 90deg;
+  }
+  @if $position == "bottom" {
+    $deg: 180deg;
+  }
+  @if $position == "left" {
+    $deg: -90deg;
+  }
+
+  -webkit-background-image: linear-gradient($deg, $color1 32%, $color2 90%) !important;
+  -moz-background-image: linear-gradient($deg, $color1 32%, $color2 90%) !important;
+  -o-background-image: linear-gradient($deg, $color1 32%, $color2 90%) !important;
+  background-image: linear-gradient($deg, $color1 32%, $color2 90%) !important;
+}
+
+
+@mixin _make-fade($i) {
+  .fade-#{($i * 10)} { opacity: ($i / 10); }
+
+  @each $breakpoint, $breakpoint-width in $grid-breakpoints {
+    $breakpoint: quote(unquote($breakpoint));
+
+    @if $breakpoint == xs {
+      @include media-breakpoint-down(xs) {
+        .fade-#{$breakpoint}-#{($i * 10)} { opacity: ($i / 10); }
+      }
+    } @else {
+      @include media-breakpoint-up($breakpoint) {
+        .fade-#{$breakpoint}-#{($i * 10)} { opacity: ($i / 10); }
+      }
+    }
+  }
+}
+
+@mixin _make-padding($i) {
+  $size: get-value($spacers, $i) * 6;
+
+  .p-#{$i}x { padding: $size !important; }
+  .pl-#{$i}x,
+  .px-#{$i}x { padding-left: $size !important; }
+  .pr-#{$i}x,
+  .px-#{$i}x { padding-right: $size !important; }
+  .pt-#{$i}x,
+  .py-#{$i}x { padding-top: $size !important; }
+  .pb-#{$i}x,
+  .py-#{$i}x { padding-bottom: $size !important; }
+
+  .p-#{$i}px { padding: #{$i}px !important; }
+  .pl-#{$i}px,
+  .px-#{$i}px { padding-left: #{$i}px !important; }
+  .pr-#{$i}px,
+  .px-#{$i}px { padding-right: #{$i}px !important; }
+  .pt-#{$i}px,
+  .py-#{$i}px { padding-top: #{$i}px !important; }
+  .pb-#{$i}px,
+  .py-#{$i}px { padding-bottom: #{$i}px !important; }
+
+  @each $breakpoint, $breakpoint-width in $grid-breakpoints {
+    $breakpoint: quote(unquote($breakpoint));
+
+    @if $breakpoint == xs {
+      @include media-breakpoint-down(xs) {
+        .p-#{$breakpoint}-#{$i}x { padding: $size !important; }
+        .pl-#{$breakpoint}-#{$i}x,
+        .px-#{$breakpoint}-#{$i}x { padding-left: $size !important; }
+        .pr-#{$breakpoint}-#{$i}x,
+        .px-#{$breakpoint}-#{$i}x { padding-right: $size !important; }
+        .pt-#{$breakpoint}-#{$i}x,
+        .py-#{$breakpoint}-#{$i}x { padding-top: $size !important; }
+        .pb-#{$breakpoint}-#{$i}x,
+        .py-#{$breakpoint}-#{$i}x { padding-bottom: $size !important; }
+
+        .p-#{$breakpoint}-#{$i}px { padding: #{$i}px !important; }
+        .pl-#{$breakpoint}-#{$i}px,
+        .px-#{$breakpoint}-#{$i}px { padding-left: #{$i}px !important; }
+        .pr-#{$breakpoint}-#{$i}px,
+        .px-#{$breakpoint}-#{$i}px { padding-right: #{$i}px !important; }
+        .pt-#{$breakpoint}-#{$i}px,
+        .py-#{$breakpoint}-#{$i}px { padding-top: #{$i}px !important; }
+        .pb-#{$breakpoint}-#{$i}px,
+        .py-#{$breakpoint}-#{$i}px { padding-bottom: #{$i}px !important; }
+      }
+    } @else {
+      @include media-breakpoint-up($breakpoint) {
+        .p-#{$breakpoint}-#{$i}x { padding: $size !important; }
+        .pl-#{$breakpoint}-#{$i}x,
+        .px-#{$breakpoint}-#{$i}x { padding-left: $size !important; }
+        .pr-#{$breakpoint}-#{$i}x,
+        .px-#{$breakpoint}-#{$i}x { padding-right: $size !important; }
+        .pt-#{$breakpoint}-#{$i}x,
+        .py-#{$breakpoint}-#{$i}x { padding-top: $size !important; }
+        .pb-#{$breakpoint}-#{$i}x,
+        .py-#{$breakpoint}-#{$i}x { padding-bottom: $size !important; }
+
+        .p-#{$breakpoint}-#{$i}px { padding: #{$i}px !important; }
+        .pl-#{$breakpoint}-#{$i}px,
+        .px-#{$breakpoint}-#{$i}px { padding-left: #{$i}px !important; }
+        .pr-#{$breakpoint}-#{$i}px,
+        .px-#{$breakpoint}-#{$i}px { padding-right: #{$i}px !important; }
+        .pt-#{$breakpoint}-#{$i}px,
+        .py-#{$breakpoint}-#{$i}px { padding-top: #{$i}px !important; }
+        .pb-#{$breakpoint}-#{$i}px,
+        .py-#{$breakpoint}-#{$i}px { padding-bottom: #{$i}px !important; }
+      }
+    }
+  }
+}
+
+
+@mixin _make-margin($i) {
+  $size: get-value($spacers, $i) * 6;
+
+  .m-#{$i}x { margin: $size !important; }
+  .ml-#{$i}x,
+  .mx-#{$i}x { margin-left: $size !important; }
+  .mr-#{$i}x,
+  .mx-#{$i}x { margin-right: $size !important; }
+  .mt-#{$i}x,
+  .my-#{$i}x { margin-top: $size !important; }
+  .mb-#{$i}x,
+  .my-#{$i}x { margin-bottom: $size !important; }
+
+  .m-#{$i}px { margin: #{$i}px !important; }
+  .ml-#{$i}px,
+  .mx-#{$i}px { margin-left: #{$i}px !important; }
+  .mr-#{$i}px,
+  .mx-#{$i}px { margin-right: #{$i}px !important; }
+  .mt-#{$i}px,
+  .my-#{$i}px { margin-top: #{$i}px !important; }
+  .mb-#{$i}px,
+  .my-#{$i}px { margin-bottom: #{$i}px !important; }
+
+  @each $breakpoint, $breakpoint-width in $grid-breakpoints {
+    $breakpoint: quote(unquote($breakpoint));
+
+    @if $breakpoint == xs {
+      @include media-breakpoint-down(xs) {
+        .m-#{$breakpoint}-#{$i}x { margin: $size !important; }
+        .ml-#{$breakpoint}-#{$i}x,
+        .mx-#{$breakpoint}-#{$i}x { margin-left: $size !important; }
+        .mr-#{$breakpoint}-#{$i}x,
+        .mx-#{$breakpoint}-#{$i}x { margin-right: $size !important; }
+        .mt-#{$breakpoint}-#{$i}x,
+        .my-#{$breakpoint}-#{$i}x { margin-top: $size !important; }
+        .mb-#{$breakpoint}-#{$i}x,
+        .my-#{$breakpoint}-#{$i}x { margin-bottom: $size !important; }
+
+        .m-#{$breakpoint}-#{$i}px { margin: #{$i}px !important; }
+        .ml-#{$breakpoint}-#{$i}px,
+        .mx-#{$breakpoint}-#{$i}px { margin-left: #{$i}px !important; }
+        .mr-#{$breakpoint}-#{$i}px,
+        .mx-#{$breakpoint}-#{$i}px { margin-right: #{$i}px !important; }
+        .mt-#{$breakpoint}-#{$i}px,
+        .my-#{$breakpoint}-#{$i}px { margin-top: #{$i}px !important; }
+        .mb-#{$breakpoint}-#{$i}px,
+        .my-#{$breakpoint}-#{$i}px { margin-bottom: #{$i}px !important; }
+      }
+    } @else {
+      @include media-breakpoint-up($breakpoint) {
+        .m-#{$breakpoint}-#{$i}x { margin: $size !important; }
+        .ml-#{$breakpoint}-#{$i}x,
+        .mx-#{$breakpoint}-#{$i}x { margin-left: $size !important; }
+        .mr-#{$breakpoint}-#{$i}x,
+        .mx-#{$breakpoint}-#{$i}x { margin-right: $size !important; }
+        .mt-#{$breakpoint}-#{$i}x,
+        .my-#{$breakpoint}-#{$i}x { margin-top: $size !important; }
+        .mb-#{$breakpoint}-#{$i}x,
+        .my-#{$breakpoint}-#{$i}x { margin-bottom: $size !important; }
+
+        .m-#{$breakpoint}-#{$i}px { margin: #{$i}px !important; }
+        .ml-#{$breakpoint}-#{$i}px,
+        .mx-#{$breakpoint}-#{$i}px { margin-left: #{$i}px !important; }
+        .mr-#{$breakpoint}-#{$i}px,
+        .mx-#{$breakpoint}-#{$i}px { margin-right: #{$i}px !important; }
+        .mt-#{$breakpoint}-#{$i}px,
+        .my-#{$breakpoint}-#{$i}px { margin-top: #{$i}px !important; }
+        .mb-#{$breakpoint}-#{$i}px,
+        .my-#{$breakpoint}-#{$i}px { margin-bottom: #{$i}px !important; }
+      }
+    }
+  }
+}
+
+
+@mixin _make-line($i) {
+  $size: #{$i}px;
+
+  .line-#{$i} { height: $size; overflow: hidden; background: $gray-400; }
+
+  @each $breakpoint, $breakpoint-width in $grid-breakpoints {
+    $breakpoint: quote(unquote($breakpoint));
+
+    @if $breakpoint == xs {
+      @include media-breakpoint-down(xs) {
+        .line-#{$breakpoint}-#{$i} { height: $size; overflow: hidden; background: $gray-400; }
+      }
+    } @else {
+      @include media-breakpoint-up($breakpoint) {
+        .line-#{$breakpoint}-#{$i} { height: $size; overflow: hidden; background: $gray-400; }
+      }
+    }
+  }
+}

@@ -1,0 +1,493 @@
+// main: ./style.scss
+
+/** ADDITIONAL CLASSES
+** —————————————————————————————————————————————————— **/
+$all-colors: () !default;
+$all-colors: map-merge($color-grays, $all-colors);
+$all-colors: map-merge($colors, $all-colors);
+$all-colors: map-merge($theme-colors, $all-colors);
+@each $color-key, $color in $all-colors {
+  .fill-#{$color-key} { fill: $color !important; }
+  .text-#{$color-key} { color: $color !important; }
+  .bg-#{$color-key} { background-color: $color !important; }
+  .border-#{$color-key} { border: solid $border-width $color !important; }
+
+  @each $breakpoint, $size in $grid-breakpoints {
+    $breakpoint: quote(unquote($breakpoint));
+
+    @if $breakpoint == xs {
+      @include media-breakpoint-down(xs) {
+        .fill-#{$breakpoint}-#{$color-key} { fill: $color !important; }
+        .text-#{$breakpoint}-#{$color-key} { color: $color !important; }
+        .bg-#{$breakpoint}-#{$color-key} { background-color: $color !important; }
+        .border-#{$breakpoint}-#{$color-key} { border: solid $border-width $color !important; }
+      }
+    } @else {
+      @include media-breakpoint-up($breakpoint) {
+        .fill-#{$breakpoint}-#{$color-key} { fill: $color !important; }
+        .text-#{$breakpoint}-#{$color-key} { color: $color !important; }
+        .bg-#{$breakpoint}-#{$color-key} { background-color: $color !important; }
+        .border-#{$breakpoint}-#{$color-key} { border: solid $border-width $color !important; }
+      }
+    }
+  }
+
+  @each $key, $position in $_positions {
+    .gd-#{$position}-#{$color-key} { @include _make-gd(get-rgba($color, .15), get-rgba($color, .94), $position); }
+    .border-#{$position}-#{$color-key} { border-#{$position}: solid $border-width $color !important; }
+
+    @each $breakpoint, $size in $grid-breakpoints {
+      $breakpoint: quote(unquote($breakpoint));
+
+      @if $breakpoint == xs {
+        @include media-breakpoint-down(xs) {
+          .gd-#{$breakpoint}-#{$position}-#{$color-key} { @include _make-gd(get-rgba($color, .15), get-rgba($color, .94), $position); }
+          .border-#{$breakpoint}-#{$position}-#{$color-key} { border-#{$position}: solid $border-width $color !important; }
+        }
+      } @else {
+        @include media-breakpoint-up($breakpoint) {
+          .gd-#{$breakpoint}-#{$position}-#{$color-key} { @include _make-gd(get-rgba($color, .15), get-rgba($color, .94), $position); }
+          .border-#{$breakpoint}-#{$position}-#{$color-key} { border-#{$position}: solid $border-width $color !important; }
+        }
+      }
+    }
+  }
+
+  @for $i from 1 through 3 {
+    @if $color-key == white {
+      // skip
+    } @else if $color-key == black {
+      // skip
+    } @else {
+      .fill-#{$i}l-#{$color-key} { fill: adjust-lightness($color, #{$i}) !important; }
+      .text-#{$i}l-#{$color-key} { color: adjust-lightness($color, #{$i}) !important; }
+      .fill-#{$i}d-#{$color-key} { fill: adjust-lightness($color, -#{$i}) !important; }
+      .text-#{$i}d-#{$color-key} { color: adjust-lightness($color, -#{$i}) !important; }
+      .bg-#{$i}l-#{$color-key} { background-color: adjust-lightness($color, #{$i}) !important; }
+      .bg-#{$i}d-#{$color-key} { background-color: adjust-lightness($color, -#{$i}) !important; }
+
+      @each $breakpoint, $size in $grid-breakpoints {
+        $breakpoint: quote(unquote($breakpoint));
+
+        @if $breakpoint == xs {
+          @include media-breakpoint-down(xs) {
+            .fill-#{$breakpoint}-#{$i}l-#{$color-key} { fill: adjust-lightness($color, #{$i}) !important; }
+            .text-#{$breakpoint}-#{$i}l-#{$color-key} { color: adjust-lightness($color, #{$i}) !important; }
+            .fill-#{$breakpoint}-#{$i}d-#{$color-key} { fill: adjust-lightness($color, -#{$i}) !important; }
+            .text-#{$breakpoint}-#{$i}d-#{$color-key} { color: adjust-lightness($color, -#{$i}) !important; }
+            .bg-#{$breakpoint}-#{$i}l-#{$color-key} { background-color: adjust-lightness($color, #{$i}) !important; }
+            .bg-#{$breakpoint}-#{$i}d-#{$color-key} { background-color: adjust-lightness($color, -#{$i}) !important; }
+          }
+        } @else {
+          @include media-breakpoint-up($breakpoint) {
+            .fill-#{$breakpoint}-#{$i}l-#{$color-key} { fill: adjust-lightness($color, #{$i}) !important; }
+            .text-#{$breakpoint}-#{$i}l-#{$color-key} { color: adjust-lightness($color, #{$i}) !important; }
+            .fill-#{$breakpoint}-#{$i}d-#{$color-key} { fill: adjust-lightness($color, -#{$i}) !important; }
+            .text-#{$breakpoint}-#{$i}d-#{$color-key} { color: adjust-lightness($color, -#{$i}) !important; }
+            .bg-#{$breakpoint}-#{$i}l-#{$color-key} { background-color: adjust-lightness($color, #{$i}) !important; }
+            .bg-#{$breakpoint}-#{$i}d-#{$color-key} { background-color: adjust-lightness($color, -#{$i}) !important; }
+          }
+        }
+      }
+
+      @each $key, $position in $_positions {
+        .gd-#{$position}-#{$i}l-#{$color-key} {
+          @include _make-gd(get-rgba(adjust-lightness($color, #{$i}), .2), get-rgba(adjust-lightness($color, #{$i}), .94), $position);
+        }
+
+        .gd-#{$position}-#{$i}d-#{$color-key} {
+          @include _make-gd(get-rgba(adjust-lightness($color, -#{$i}), .2), get-rgba(adjust-lightness($color, -#{$i}), .94), $position);
+        }
+
+        @each $breakpoint, $size in $grid-breakpoints {
+          $breakpoint: quote(unquote($breakpoint));
+
+          @if $breakpoint == xs {
+            @include media-breakpoint-down(xs) {
+              .gd-#{$breakpoint}-#{$position}-#{$i}l-#{$color-key} {
+                @include _make-gd(get-rgba(adjust-lightness($color, #{$i}), .2), get-rgba(adjust-lightness($color, #{$i}), .94), $position);
+              }
+
+              .gd-#{$breakpoint}-#{$position}-#{$i}d-#{$color-key} {
+                @include _make-gd(get-rgba(adjust-lightness($color, -#{$i}), .2), get-rgba(adjust-lightness($color, -#{$i}), .94), $position);
+              }
+            }
+          } @else {
+            @include media-breakpoint-up($breakpoint) {
+              .gd-#{$breakpoint}-#{$position}-#{$i}l-#{$color-key} {
+                @include _make-gd(get-rgba(adjust-lightness($color, #{$i}), .2), get-rgba(adjust-lightness($color, #{$i}), .94), $position);
+              }
+
+              .gd-#{$breakpoint}-#{$position}-#{$i}d-#{$color-key} {
+                @include _make-gd(get-rgba(adjust-lightness($color, -#{$i}), .2), get-rgba(adjust-lightness($color, -#{$i}), .94), $position);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+$_counting: 10 !default;
+@for $i from 1 through 10 {
+  @if $i < 7 {
+    .text-#{$i} { font-size: get-value($font-sizes, $i) !important; }
+    .text-#{$i}x { font-size: (get-value($font-sizes, $i) * 6) !important; }
+    .h#{$i}x { font-size: (get-value($font-sizes, 1) + ($i - 1)) !important; }
+
+    @each $breakpoint, $size in $grid-breakpoints {
+      $breakpoint: quote(unquote($breakpoint));
+
+      @if $breakpoint == xs {
+        @include media-breakpoint-down(xs) {
+          .text-#{$breakpoint}-#{$i} { font-size: get-value($font-sizes, $i) !important; }
+          .text-#{$breakpoint}-#{$i}x { font-size: (get-value($font-sizes, $i) * 6) !important; }
+          .h-#{$breakpoint}-#{$i}x { font-size: (get-value($font-sizes, 1) + ($i - 1)) !important; }
+        }
+      } @else {
+        @include media-breakpoint-up($breakpoint) {
+          .text-#{$breakpoint}-#{$i} { font-size: get-value($font-sizes, $i) !important; }
+          .text-#{$breakpoint}-#{$i}x { font-size: (get-value($font-sizes, $i) * 6) !important; }
+          .h-#{$breakpoint}-#{$i}x { font-size: (get-value($font-sizes, 1) + ($i - 1)) !important; }
+        }
+      }
+    }
+  }
+
+  @include _make-width($i);
+  @include _make-height($i);
+  @for $ii from 1 through 9 {
+    @include _make-subwidth($ii, $i);
+    @include _make-subheight($ii, $i);
+  }
+  @include _make-positions($i);
+  @include _make-fade($i);
+  @include _make-line($i);
+  @include _make-padding($i);
+  @include _make-margin($i);
+
+  $_counting: $_counting - 1;
+}
+
+
+@each $key, $weight in $weights {
+  .font-weight-#{$key},
+  .#{$key} { font-weight: $weight !important; }
+
+  @each $breakpoint, $size in $grid-breakpoints {
+    $breakpoint: quote(unquote($breakpoint));
+
+    @if $breakpoint == xs {
+      @include media-breakpoint-down(xs) {
+        .font-weight-#{$breakpoint}-#{$key},
+        .#{$key} { font-weight: $weight !important; }
+      }
+    } @else {
+      @include media-breakpoint-up($breakpoint) {
+        .font-weight-#{$breakpoint}-#{$key},
+        .#{$key} { font-weight: $weight !important; }
+      }
+    }
+  }
+}
+
+
+@each $key, $size in $radius {
+  .rounded-#{$key} { border-radius: $size !important; overflow: hidden !important; }
+
+  @each $position, $abbrev in $_positions {
+    $radius: $size;
+
+    @if $position == "left" {
+      $radius: $size 0 0 $size;
+    }
+
+    @if $position == "right" {
+      $radius: 0 $size $size 0;
+    }
+
+    @if $position == "bottom" {
+      $radius: 0 0 $size $size;
+    }
+
+    @if $position == "top" {
+      $radius: $size $size 0 0;
+    }
+
+    .rounded-#{$position}-#{$key} {
+      -webkit-border-radius: $radius !important;
+      -moz-border-radius: $radius !important;
+      border-radius: $radius !important;
+    }
+
+    @each $breakpoint, $size in $grid-breakpoints {
+      $breakpoint: quote(unquote($breakpoint));
+
+      @if $breakpoint == xs {
+        @include media-breakpoint-down(xs) {
+          .rounded-#{$position}-#{$breakpoint}-#{$key} {
+            -webkit-border-radius: $radius !important;
+            -moz-border-radius: $radius !important;
+            border-radius: $radius !important;
+          }
+        }
+      } @else {
+        @include media-breakpoint-up($breakpoint) {
+          .rounded-#{$position}-#{$breakpoint}-#{$key} {
+            -webkit-border-radius: $radius !important;
+            -moz-border-radius: $radius !important;
+            border-radius: $radius !important;
+          }
+        }
+      }
+    }
+  }
+}
+@each $position, $abbrev in $_positions {
+  .rounded-#{$position}-0 {
+    @if $position == "left" {
+      border-top-left-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+    }
+    @if $position == "right" {
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+    @if $position == "top" {
+      border-top-left-radius: 0 !important;
+      border-top-right-radius: 0 !important;
+    }
+    @if $position == "bottom" {
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+  }
+
+  @each $breakpoint, $size in $grid-breakpoints {
+    $breakpoint: quote(unquote($breakpoint));
+
+    @if $breakpoint == xs {
+      @include media-breakpoint-down(xs) {
+        .rounded-#{$position}-#{$breakpoint}-0 {
+          @if $position == "left" {
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+          }
+          @if $position == "right" {
+            border-top-right-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+          }
+          @if $position == "top" {
+            border-top-left-radius: 0 !important;
+            border-top-right-radius: 0 !important;
+          }
+          @if $position == "bottom" {
+            border-bottom-left-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+          }
+        }
+      }
+    } @else {
+      @include media-breakpoint-up($breakpoint) {
+        .rounded-#{$position}-#{$breakpoint}-0 {
+          @if $position == "left" {
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+          }
+          @if $position == "right" {
+            border-top-right-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+          }
+          @if $position == "top" {
+            border-top-left-radius: 0 !important;
+            border-top-right-radius: 0 !important;
+          }
+          @if $position == "bottom" {
+            border-bottom-left-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+          }
+        }
+      }
+    }
+  }
+}
+.rounded { @extend .rounded-sm; }
+
+
+@each $breakpoint, $size in $grid-breakpoints {
+  $breakpoint: quote(unquote($breakpoint));
+
+  @if $breakpoint == xs {
+    .w-auto { width: auto !important; }
+    .h-auto { height: auto !important; }
+  } @else {
+    @include media-breakpoint-up($breakpoint) {
+      .w-#{$breakpoint}-auto { width: auto !important; }
+      .h-#{$breakpoint}-auto { height: auto !important; }
+    }
+  }
+}
+
+
+.box-shadow {
+  @include _make-shadow();
+}
+
+.bg-image {
+  position: absolute !important;
+  left: 0;
+  top: 0;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  z-index: 0 !important;
+
+  &.position-absolute {
+    top: inherit;
+    left: inherit;
+  }
+
+  img {
+    position: absolute;
+    top: -25%;
+    bottom: -25%;
+    margin-top: auto;
+    margin-bottom: auto;
+    left: -25%;
+    right: -25%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 250%;
+    max-height: 250%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+
+    // @include media-breakpoint-only(sm) {
+    //   max-width: none;
+    //   max-height: 100%;
+    //   min-width: 100%;
+    //   min-height: 100%;
+    // }
+    //
+    // @include media-breakpoint-only(xs) {
+    //   max-width: 200%;
+    //   max-height: 100%;
+    //   min-width: none;
+    //   min-height: 100%;
+    // }
+  }
+  // img {
+  //   position: relative !important;
+  //   top: 0;
+  //   left: 0;
+  //   width: auto !important;
+  //   min-width: 100% !important;
+  //   height: auto !important;
+  //   min-height: 100% !important;
+  // }
+
+  @at-root .bg-wrapper {
+    position: relative !important;
+  }
+}
+
+.bg-overlay {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+@for $i from 0 through 10 {
+  $pos: #{$i}px;
+  $pos10x: #{($i * 10)}px;
+
+  @each $key, $value in $_positions {
+    .#{$key}-#{$i} {
+      #{$key}: #{$pos} !important;
+    }
+
+    .#{$key}-#{$i}x {
+      #{$key}: #{$pos10x} !important;
+    }
+
+    @each $breakpoint, $size in $grid-breakpoints {
+      $breakpoint: quote(unquote($breakpoint));
+
+      @if $breakpoint == xs {
+        @include media-breakpoint-down(xs) {
+          .#{$key}-#{$breakpoint}-#{$i} {
+            #{$key}: #{$pos} !important;
+          }
+
+          .#{$key}-#{$breakpoint}-#{$i}x {
+            #{$key}: #{$pos10x} !important;
+          }
+        }
+      } @else {
+        @include media-breakpoint-up($breakpoint) {
+          .#{$key}-#{$breakpoint}-#{$i} {
+            #{$key}: #{$pos} !important;
+          }
+
+          .#{$key}-#{$breakpoint}-#{$i}x {
+            #{$key}: #{$pos10x} !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+@each $key, $value in $_positions {
+  .#{$key}-auto {
+    #{$key}: auto !important;
+  }
+
+  @each $breakpoint, $size in $grid-breakpoints {
+    $breakpoint: quote(unquote($breakpoint));
+
+    @if $breakpoint == xs {
+      @include media-breakpoint-down(xs) {
+        .#{$key}-#{$breakpoint}-auto {
+          #{$key}: auto !important;
+        }
+      }
+    } @else {
+      @include media-breakpoint-up($breakpoint) {
+        .#{$key}-#{$breakpoint}-auto {
+          #{$key}: auto !important;
+        }
+      }
+    }
+  }
+}
+
+
+@each $social, $color in $socials {
+  .text-#{$social} { color: #{$color} !important; }
+  .bg-#{$social} { background: #{$color} !important; }
+}
+
+.bg-transparent {
+  background: transparent !important;
+}
+
+.top-auto {
+  top: auto !important;
+}
+.bottom-auto {
+  bottom: auto !important;
+}
+.left-auto {
+  left: auto !important;
+}
+.right-auto {
+  right: auto !important;
+}

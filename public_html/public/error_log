@@ -1,0 +1,2 @@
+[19-Jun-2018 08:55:49 UTC] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in /home/lpp/public_html/storage/framework/views/a61ac78571d0344564b5ab2679eba1371cdeebb4.php on line 1
+[19-Jun-2018 08:55:59 UTC] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in /home/lpp/public_html/storage/framework/views/a61ac78571d0344564b5ab2679eba1371cdeebb4.php on line 1
