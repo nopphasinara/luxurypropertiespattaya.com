@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Storage;
@@ -28,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // Set default pagination view template
         Paginator::defaultView('partials.pagination');
-        
+
         $data = CustomConfig::get();
         if ($data) {
           $customConfig = [];
@@ -52,29 +53,29 @@ class AppServiceProvider extends ServiceProvider
             'custom' => $customConfig,
           ]);
         }
-        
+
         view()->composer('partials.header.navbar-main', function ($view) {
           $menuTree = '';
           $menu = SiteMenu::bySlug('main-menu');
           if ($menu->children) $menuTree = SiteMenu::tree($menu->children, $menuTree, 0);
-          
+
           $view->with([
             'menu' => $menu,
             'menuTree' => $menuTree,
           ]);
         });
-        
+
         view()->composer('partials.footer.footer', function ($view) {
           $menuTree = '';
           $menu = SiteMenu::bySlug('footer-menu');
           if ($menu->children) $menuTree = SiteMenu::tree($menu->children, $menuTree, 0, 'footer-menu');
-          
+
           $view->with([
             'menu' => $menu,
             'menuTree' => $menuTree,
           ]);
         });
-        
+
         view()->composer('*', function ($view) {
           $mixed = [
             'is_home' => false,
@@ -92,20 +93,20 @@ class AppServiceProvider extends ServiceProvider
             $body_class[] = 'page-inner';
             $mixed['is_inner'] = true;
           }
-          
+
           $base_route = (request()->segment(1) === '/') ? 'homepage' : request()->segment(1);
-          
+
           $mixed['base_route'] = $base_route;
           $mixed['pagename'] = $pagename;
           $mixed['body_class'] = $body_class;
-          
+
           $view->with([
             'pagename' => $pagename,
             'body_class' => implode(' ', $body_class),
             'mixed' => $mixed,
           ]);
         });
-        
+
         view()->composer('partials.header.navbar-main', function ($view) {
             // $segments = request()->segments();
             // if (isset($segments[0]) && $segments[0]) {
@@ -125,10 +126,10 @@ class AppServiceProvider extends ServiceProvider
             // ];
             //
             // $pages[$pagename] = 'active';
-            
+
             $view->with(get_pagenames());
         });
-        
+
         view()->composer([
           'components/featured-properties',
           'partials.homepage.featured-properties-new',
@@ -139,74 +140,74 @@ class AppServiceProvider extends ServiceProvider
             $featuredAds = $featuredAds->shuffle();
             $featuredAds = $featuredAds[0];
           }
-          
+
           $view->with([
             'featuredProperties' => $featuredProperties,
             'featuredAds' => $featuredAds,
           ]);
         });
-        
+
         view()->composer([
           'partials.header.navbar-main',
           'partials.homepage.popular-locations',
         ], function ($view) {
           $locations = Location::featured()->orderByNo()->get();
-          
+
           $view->with([
             'locations' => $locations,
           ]);
         });
-        
+
         view()->composer([
           'components.news-categories',
         ], function ($view) {
           $categoriesTree = '';
           $categories = NewsCategory::where('web_visible', 1)->where('parent_id', 0)->orderBy('order', 'asc')->get();
           if ($categories) $categoriesTree = NewsCategory::tree($categories, $categoriesTree, 0);
-          
+
           // $newsCategories = NewsCategory::visible()->get();
-          
+
           $view->with([
             'categoriesTree' => $categoriesTree,
           ]);
         });
-        
+
         view()->composer([
           'components.business-categories',
         ], function ($view) {
           $categoriesTree = '';
           $categories = BusinessCategory::where('web_visible', 1)->where('parent_id', 0)->orderBy('order', 'asc')->get();
           if ($categories) $categoriesTree = BusinessCategory::tree($categories, $categoriesTree, 0);
-          
+
           // $businessCategories = BusinessCategory::visible()->get();
-          
+
           $view->with([
             'categoriesTree' => $categoriesTree,
           ]);
         });
-        
+
         view()->composer([
           'components.recent-news',
         ], function ($view) {
           $recentNews = News::visible()->take(10)->get();
-          
+
           $view->with([
             'recentNews' => $recentNews,
           ]);
         });
-        
+
         view()->composer([
           'components.business-add',
         ], function ($view) {
           $categoriesTree = '';
           $categories = BusinessCategory::where('web_visible', 1)->where('parent_id', 0)->orderBy('order', 'asc')->get();
           if ($categories) $categoriesTree = BusinessCategory::tree($categories, $categoriesTree, 0, 'form-add');
-          
+
           $view->with([
             'categoriesTree' => $categoriesTree,
           ]);
         });
-        
+
         view()->composer([
           'components.business-ads',
         ], function ($view) {
@@ -228,7 +229,7 @@ class AppServiceProvider extends ServiceProvider
                   }
                 }
               }
-              
+
               $data = BusinessAds::where('web_visible', 1)->whereIn('category_id', $categories)->orWhere('category_id', NULL);
             }
           }
@@ -236,64 +237,64 @@ class AppServiceProvider extends ServiceProvider
           $data = $data->shuffle();
           $featuredAds = [];
           $ads = [];
-          
+
           foreach ($data as $key => $value) {
             if ($value->featured === 1) $featuredAds[] = $value;
             if ($value->featured !== 1) $ads[] = $value;
           }
-          
+
           $view->with([
             'featuredAds' => $featuredAds,
             'ads' => $ads,
           ]);
         });
-        
+
         view()->composer([
           'components.search-toolbar',
         ], function ($view) {
           $locations = Location::visible()->orderByNo()->get();
           $propertyTypes = ListingType::visible()->get();
-          
+
           $view->with([
             'propertyTypes' => $propertyTypes,
             'locations' => $locations,
           ]);
         });
-        
+
         view()->composer([
           'partials.homepage.slide',
         ], function ($view) {
           $searchTags = config('custom.homepage_search_tags');
-          
+
           $view->with([
             'searchTags' => json_decode($searchTags, true),
           ]);
         });
-        
+
         view()->composer([
           'partials.homepage.clients',
         ], function ($view) {
           $data = Testimonial::visible()->featured()->get();
-          
+
           $view->with([
             'testimonials' => $data->take(3),
           ]);
         });
-        
+
         view()->composer([
           'partials.footer.contact-info',
         ], function ($view) {
           $office_location = config('custom.office_location');
           list($lat, $lng) = $office_location;
           $address = config('custom.office_location');
-          
+
           $view->with([
             'lat' => $lat,
             'lng' => $lng,
             'address' => $address,
           ]);
         });
-        
+
         view()->composer([
           'partials.pagination',
           'search',
@@ -302,7 +303,7 @@ class AppServiceProvider extends ServiceProvider
           $page = request('page', 1);
           $searchQuery = request()->query();
           $searchQuery['page'] = $page;
-          
+
           $view->with([
             'searchQuery' => $searchQuery,
             'currentPath' => $currentPath,
@@ -323,7 +324,7 @@ class AppServiceProvider extends ServiceProvider
         //     'locations' => $locations,
         //   ]);
         // });
-        
+
         // view()->composer('partials.header.navbar-main', function($view) {
         //   $locations = Location::all();
         //

@@ -27,19 +27,19 @@ class PageController extends Controller
       if (isset($segments[0]) && $segments[0] && count($segments) == 1) {
         $slug = $segments[0];
         $page = Pages::bySlug($slug);
-        
+
         if ($page) {
           return view('page')->with([
             'page' => $page,
           ]);
         }
       }
-      
+
       if (view()->exists($pagename)) return view($pagename);
-      
+
       return abort(404);
     }
-    
+
     public function sitemap()
     {
       $listings = \App\Models\Listing\Listing::all();
@@ -47,10 +47,10 @@ class PageController extends Controller
       $directoryCategories = \App\Models\BusinessListing\BusinessCategory::all();
       $news = \App\Models\News\News::all();
       $newsCategories = \App\Models\News\NewsCategory::all();
-      
+
       $content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
       $content .= "<urlset xmlns=\"https://www.sitemaps.org/schemas/sitemap/0.9\">\n";
-      
+
       if ($listings->count()) {
         foreach ($listings as $key => $listing) {
           $content .= "<url>
@@ -61,7 +61,7 @@ class PageController extends Controller
           </url>\n";
         }
       }
-      
+
       if ($listingTypes->count()) {
         foreach ($listingTypes as $key => $listingType) {
           $content .= "<url>
@@ -72,7 +72,7 @@ class PageController extends Controller
           </url>\n";
         }
       }
-      
+
       if ($directoryCategories->count()) {
         foreach ($directoryCategories as $key => $directoryCategory) {
           $content .= "<url>
@@ -83,7 +83,7 @@ class PageController extends Controller
           </url>\n";
         }
       }
-      
+
       if ($news->count()) {
         foreach ($news as $key => $newsItem) {
           $content .= "<url>
@@ -94,7 +94,7 @@ class PageController extends Controller
           </url>\n";
         }
       }
-      
+
       if ($newsCategories->count()) {
         foreach ($newsCategories as $key => $newsCategory) {
           $content .= "<url>
@@ -105,25 +105,25 @@ class PageController extends Controller
           </url>\n";
         }
       }
-      
+
       $content .= "</urlset>";
-      
+
       ini_set('output_buffering', 'off');
       ini_set('zlib.output_compression', false);
-      
+
       ini_set('implicit_flush', true);
       ob_implicit_flush(true);
-      
+
       header("Content-type: application/xml");
       header('Cache-Control: no-cache');
-      
+
       echo $content;
     }
-    
+
     public function demo()
     {
       // $image = crop_image('listings/00a3e5d4e868c21f071fef620b190e31.jpg', '', 'uploads');
-      
+
       // $disk = Storage::disk('uploads');
       // $file = 'listings/00a3e5d4e868c21f071fef620b190e31.jpg';
       // $thumbnail = '_thumbs/Images/' . $file;
@@ -184,7 +184,7 @@ class PageController extends Controller
       $news = '';
       return view('news-details', compact('news'));
     }
-    
+
     public function contactUsSubmit(Request $request)
     {
       $validator = Validator::make($request->all(), [
@@ -194,27 +194,27 @@ class PageController extends Controller
         'subject' => 'required|max:150',
         'message' => 'nullable',
       ]);
-      
+
       if ($validator->fails()) return back()->withErrors($validator)->withInput();
-      
+
       $message = new ContactSent($request->all());
       // echo $message->render();
-      
+
       // Mail::to(['goldfishcreative.thailand@gmail.com'])->send($message);
       Mail::to(config('custom.notification_contact_to'))->bcc('goldfishcreative.thailand@gmail.com')->send($message);
-      
+
       flash()->overlay('<p class="lead pb-2 text-center text-success">You message has been sent,<br>thank you.</p><div class="px-3"><div class="btn btn-success btn-block btn-sm mb-3" data-dismiss="modal">Close</div></div>', '<h3 class="mt-4 mb-0 text-success text-center w-100"><p class="mb-3"><i class="far fa-5x fa-check-circle"></i></p><p class="mb-1">Success!</p></h3>', ['success']);
-      
+
       return redirect()->back();
     }
-    
+
     public function BusinessAddSubmit(Request $request)
     {
       $request['image_path'] = '';
       if ($request->hasFile('image')) {
         $request['image_path'] = $request->file('image')->store('directory', 'uploads');
       }
-      
+
       $validator = Validator::make($request->all(), [
         'name' => 'required|max:80',
         'email' => 'required|email|max:80',
@@ -223,9 +223,9 @@ class PageController extends Controller
         'image' => 'nullable',
         'category_id' => 'required',
       ]);
-      
+
       if ($validator->fails()) return back()->withErrors($validator)->withInput();
-      
+
       $created_id = BusinessListing::create([
         'name' => $request->name,
         'email' => $request->email,
@@ -236,19 +236,19 @@ class PageController extends Controller
         'category_id' => $request->category_id,
         'web_visible' => 0,
       ])->id;
-      
+
       $request['created_id'] = $created_id;
       $category = BusinessCategory::where('id', $request->category_id)->first();
       $request['category_name'] = ($category) ? $category->name : '';
-      
+
       $message = new BusinessAdded($request->all());
       // echo $message->render();
-      
+
       // Mail::to(['goldfishcreative.thailand@gmail.com'])->send($message);
       Mail::to(config('custom.notification_contact_to'))->bcc('goldfishcreative.thailand@gmail.com')->send($message);
-      
+
       flash()->overlay('<p class="lead pb-2 text-center text-success">Your details has been sent,<br>thank you.</p><div class="px-3"><div class="btn btn-success btn-block btn-sm mb-3" data-dismiss="modal">Close</div></div>', '<h3 class="mt-4 mb-0 text-success text-center w-100"><p class="mb-3"><i class="far fa-5x fa-check-circle"></i></p><p class="mb-1">Success!</p></h3>', ['success']);
-      
+
       return redirect()->back();
     }
 }
