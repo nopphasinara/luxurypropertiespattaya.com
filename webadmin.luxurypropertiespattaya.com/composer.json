@@ -21,6 +21,7 @@
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "spatie/eloquent-sortable": "^3.4",
+        "appzcoder/laravel-package-discovery": "dev-master",
         "spatie/laravel-backup": "^5.6"
     },
     "require-dev": {
@@ -58,8 +59,8 @@
             "@php artisan key:generate"
         ],
         "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover"
+          "Appzcoder\\LaravelPackageDiscovery\\ComposerScripts::postDump",
+          "@php artisan package:discover"
         ]
     },
     "config": {
