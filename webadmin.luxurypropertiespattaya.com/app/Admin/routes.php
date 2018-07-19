@@ -30,5 +30,6 @@ Route::group([
     $router->resource('testimonials', TestimonialController::class);
     $router->resource('pages', PagesController::class);
     $router->resource('categories', CategoryController::class);
+    $router->resource('affiliate-links', AffiliateLinkController::class);
     $router->get('site-settings', 'SiteSettingController@show');
 });
