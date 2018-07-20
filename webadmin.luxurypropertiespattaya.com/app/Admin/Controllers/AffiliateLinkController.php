@@ -153,7 +153,7 @@ class AffiliateLinkController extends BaseController
             $form->hidden('id');
 
             // Add an input box of type text
-            $form->text('name', 'Name')->rules('required');
+            $form->text('name', 'Campaign Name')->rules('required');
 
             // Add an input box of type text
             // $form->text('slug', 'Slug')->rules(function ($form) {
@@ -192,7 +192,7 @@ class AffiliateLinkController extends BaseController
             $form->divide();
 
             // Add textarea for the describe field
-            $form->image('image', 'Ads Image')->move('directory-ads')->uniqueName()->removable();
+            $form->image('image', 'Ads Image')->move('affiliate-banners')->uniqueName()->removable();
 
             $form->divide();
 
