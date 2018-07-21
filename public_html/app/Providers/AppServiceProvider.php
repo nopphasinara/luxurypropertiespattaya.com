@@ -17,6 +17,7 @@ use App\Models\BusinessListing\BusinessAds;
 use App\Models\BusinessListing\BusinessCategory;
 use App\Models\Testimonial\Testimonial;
 use App\Models\Config\Config as CustomConfig;
+use App\Models\Affiliate\Affiliate;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,6 +30,8 @@ class AppServiceProvider extends ServiceProvider
     {
         // Set default pagination view template
         Paginator::defaultView('partials.pagination');
+
+        Affiliate::track();
 
         $data = CustomConfig::get();
         if ($data) {

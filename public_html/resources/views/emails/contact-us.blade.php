@@ -39,17 +39,23 @@
             <td {!! attrs(['td_gutter'], ['td']) !!}>&nbsp;</td>
             <td {!! attrs(['td', 'left'], ['td']) !!}>
               <p {!! attrs(['p'], ['p']) !!}>Hi, {{ config('custom.site_name') }}</p>
-              
+
               <p {!! attrs(['p'], ['p']) !!}>Just dropping to let you know you have new message from {{ $input['name'] }}.</p>
-              
+
               <p {!! attrs(['p'], ['p']) !!}><strong>Contact Information:</strong></p>
-              
+
               <p {!! attrs(['p'], ['p']) !!}><strong>Name:</strong> {{ $input['name'] }}</p>
               <p {!! attrs(['p'], ['p']) !!}><strong>Email:</strong> <a href="mailto: {{ $input['email'] }}" {!! attrs(['link'], ['link', 'text_white']) !!}>{{ $input['email'] }}</a></p>
               <p {!! attrs(['p'], ['p']) !!}><strong>Phone No.:</strong> {{ $input['phone'] }}</p>
               <p {!! attrs(['p'], ['p']) !!}><strong>Subject:</strong> {{ $input['subject'] }}</p>
               <p {!! attrs(['p'], ['p']) !!}><strong>Message:</strong></p>
               <p {!! attrs(['p'], ['p']) !!}>{!! nl2br(htmlentities($input['message'])) !!}</p>
+
+              @if ($affiliateUser)
+                <p {!! attrs(['p'], ['p']) !!}><strong>Affiliate:</strong> {{ $affiliateUser->name }} (ID: {{ $affiliateUser->id }})</p>
+              @else
+
+              @endif
             </td>
             <td {!! attrs(['td_gutter'], ['td']) !!}>&nbsp;</td>
           </tr>
@@ -91,11 +97,11 @@
             <td {!! attrs(['td_gutter'], ['td']) !!}>&nbsp;</td>
             <td {!! attrs(['td', 'center'], ['td']) !!}>
               <p {!! attrs(['p'], ['p', 'p_mb_0']) !!}>Copyright &copy; 2018 <a href="{{ url('/') }}" {!! attrs(['link'], ['link']) !!}><strong>{{ config('custom.site_name') }}</strong></a></p>
-              
+
               <p {!! attrs(['p'], ['p']) !!}>{{ config('custom.office_address') }}</p>
-              
+
               <hr {!! attrs(['hr'], ['hr']) !!}>
-              
+
               <p {!! attrs(['p'], ['p', 'p_mb_0']) !!}>This is a contact report from {{ config('custom.site_name') }}.</p>
               <p {!! attrs(['p'], ['p']) !!}>Please do not reply to this email.</p>
             </td>
