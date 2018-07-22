@@ -25,7 +25,7 @@ class Affiliate extends Model
       $affiliate_user = \App\User::where('id', $aid)->first();
 
       if (!isset($_COOKIE['affiliate_id'])) {
-        setcookie('affiliate_id', bin2hex($aid . ':' . $requested_uri), strtotime('+1 hours'), '/');
+        setcookie('affiliate_id', encrypt($aid . ':' . $requested_uri), strtotime('+1 hours'), '/');
       }
     }
   }

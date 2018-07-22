@@ -10,7 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class BusinessAdded extends Mailable
 {
     use Queueable, SerializesModels;
-    
+
     public $input;
 
     /**
@@ -34,7 +34,7 @@ class BusinessAdded extends Mailable
         $this->view('emails.business-added')->with([
           'input' => $this->input,
         ]);
-        
+
         return $this;
     }
 }

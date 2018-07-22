@@ -120,35 +120,6 @@ class PageController extends Controller
       echo $content;
     }
 
-    public function demo()
-    {
-      // $image = crop_image('listings/00a3e5d4e868c21f071fef620b190e31.jpg', '', 'uploads');
-
-      // $disk = Storage::disk('uploads');
-      // $file = 'listings/00a3e5d4e868c21f071fef620b190e31.jpg';
-      // $thumbnail = '_thumbs/Images/' . $file;
-      // $file_path = $disk->path($file);
-      // $fit_size = [400, 400];
-      //
-      // if ($disk->exists($thumbnail)) {
-      //   $image = Image::make($disk->path($thumbnail));
-      //   $exif = $image->exif('COMPUTED');
-      //
-      //   if ($image->width() > $fit_size[0] || $image->height() > $fit_size[1]) {
-      //     $image->fit($fit_size[0], $fit_size[1], function ($constraint) {
-      //       $constraint->aspectRatio();
-      //       $constraint->upsize();
-      //     })->save();
-      //   }
-      // } else {
-      //   $image = Image::make($disk->path($file));
-      //   $image->fit($fit_size[0], $fit_size[1], function ($constraint) {
-      //     $constraint->aspectRatio();
-      //     $constraint->upsize();
-      //   })->save($disk->path($thumbnail));
-      // }
-    }
-
     /**
      * Show properties associated with the location.
      *

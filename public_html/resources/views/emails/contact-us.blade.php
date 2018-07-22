@@ -52,7 +52,7 @@
               <p {!! attrs(['p'], ['p']) !!}>{!! nl2br(htmlentities($input['message'])) !!}</p>
 
               @if ($affiliateUser)
-                <p {!! attrs(['p'], ['p']) !!}><strong>Affiliate:</strong> {{ $affiliateUser->name }} (ID: {{ $affiliateUser->id }})</p>
+                <p {!! attrs(['p'], ['p']) !!}><strong>Referred By:</strong> {{ $affiliateUser->name }} (ID:{{ $affiliateUser->id }})</p>
               @else
 
               @endif
