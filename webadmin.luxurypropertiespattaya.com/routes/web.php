@@ -15,3 +15,5 @@ Route::get('/', function () {
     return redirect('/admin');
     // return view('welcome');
 });
+
+Route::get('/generate-thumbnail', '\App\Models\Thumbnail\Controllers\ThumbnailController@generate');
