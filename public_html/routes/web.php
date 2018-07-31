@@ -27,12 +27,12 @@ Route::get('radio-{status}', function ($status = '') {
     // setcookie('is_radio_played', '', time() - 3600, '/');
     setcookie('is_radio_played', 1, 0, '/');
   }
-  
+
   if ($status === 'pause') {
     // setcookie('is_radio_played', '', time() - 3600, '/');
     setcookie('is_radio_played', 0, 0, '/');
   }
-  
+
   return json_encode([
     'status' => $status,
   ]);
@@ -101,6 +101,10 @@ Route::get('properties-in-{location}', '\App\Models\Listing\ListingController@by
 Route::get('property-details/{id}/{slug}', '\App\Models\Listing\ListingController@show')->where([
   'id' => '[0-9]+',
   'slug' => '[0-9a-zA-Z\-\_\.]+',
+]);
+
+Route::get('listing-category/{category}', '\App\Models\Listing\ListingController@byCategory')->where([
+  'category' => '[0-9a-zA-Z\-\_\.]+',
 ]);
 
 
