@@ -25,3 +25,7 @@ Thumbs.db
 /lpp.zip
 /lpp_master.sql.gz
 **/vendor
+**/public/uploads/**/*.jpg
+**/public/uploads/**/*.gif
+**/public/uploads/**/*.png
+**/public/uploads/**/*.jpeg
