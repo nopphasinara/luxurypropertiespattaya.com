@@ -25,7 +25,8 @@ class GoogleMaps extends Field
      */
     public static function getAssets()
     {
-        $js = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key='.env('GOOGLE_API_KEY');
+        $js = '';
+        // $js = 'https://maps.googleapis.com/maps/api/js?v=3.exp&key='.env('GOOGLE_API_KEY');
         return compact('js');
     }
 
@@ -38,7 +39,7 @@ class GoogleMaps extends Field
 
         $this->label = $this->formatLabel($arguments);
         $this->id = $this->formatId($this->column);
-        
+
         /*
          * Google map is blocked in mainland China
          * people in China can use Tencent map instead(;
@@ -50,35 +51,37 @@ class GoogleMaps extends Field
     {
         // 12.926390930770966
         // 100.95266711163333
-        
+
         $this->script = <<<EOT
         var label_lat = $('#label_{$this->id['lat']}');
         var label_lng = $('#label_{$this->id['lng']}');
-        
-        $('#label_{$this->id['lat']}, #label_{$this->id['lng']}').on('change', function () {
-          var self = $(this);
-          var id = self.attr('id');
-          var value = self.val();
-          var lat = $('#{$this->id['lat']}');
-          var lng = $('#{$this->id['lng']}');
-          var default_lat = '12.922846';
-          var default_lng = '100.883273';
-          
-          if (id == 'label_lat') {
-            lat.attr('value', value);
-          }
-          
-          if (id == 'label_lng') {
-            lng.attr('value', value);
-          }
-          
-          initGoogleMap('{$this->id['lat']}{$this->id['lng']}');
+
+        $(document).ready(function () {
+          $('#label_{$this->id['lat']}, #label_{$this->id['lng']}').on('change', function () {
+            var self = $(this);
+            var id = self.attr('id');
+            var value = self.val();
+            var lat = $('#{$this->id['lat']}');
+            var lng = $('#{$this->id['lng']}');
+            var default_lat = '12.922846';
+            var default_lng = '100.883273';
+
+            if (id == 'label_lat') {
+              lat.attr('value', value);
+            }
+
+            if (id == 'label_lng') {
+              lng.attr('value', value);
+            }
+
+            initGoogleMap('{$this->id['lat']}{$this->id['lng']}');
+          });
         });
-        
+
         function initGoogleMap(name) {
             var lat = $('#{$this->id['lat']}');
             var lng = $('#{$this->id['lng']}');
-            
+
             if (lat.val() == '') {
               lat.attr('value', '12.922846');
               label_lat.attr('value', '12.922846');
@@ -87,7 +90,7 @@ class GoogleMaps extends Field
               lng.attr('value', '100.883273');
               label_lng.attr('value', '100.883273');
             }
-            
+
             var LatLng = new google.maps.LatLng(lat.val(), lng.val());
 
             var options = {
@@ -117,9 +120,11 @@ class GoogleMaps extends Field
             });
         }
 
-        initGoogleMap('{$this->id['lat']}{$this->id['lng']}');
-        
-        
+        $(document).ready(function () {
+          initGoogleMap('{$this->id['lat']}{$this->id['lng']}');
+        });
+
+
 EOT;
     }
 }

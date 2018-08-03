@@ -21,9 +21,10 @@ class Map extends Field
     public static function getAssets()
     {
         if (config('app.locale') == 'zh-CN') {
-            $js = '//map.qq.com/api/js?v=2.exp';
+            $js = 'https://map.qq.com/api/js?v=2.exp';
         } else {
-            $js = '//maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key='.env('GOOGLE_API_KEY');
+            // $js = '';
+            $js = 'https://maps.googleapis.com/maps/api/js?v=3.exp&key='.env('GOOGLE_API_KEY');
         }
 
         return compact('js');
@@ -84,7 +85,9 @@ class Map extends Field
             });
         }
 
-        initGoogleMap('{$this->id['lat']}{$this->id['lng']}');
+        $(document).ready(function () {
+          initGoogleMap('{$this->id['lat']}{$this->id['lng']}');
+        });
 EOT;
     }
 
@@ -131,7 +134,9 @@ EOT;
             });
         }
 
-        initTencentMap('{$this->id['lat']}{$this->id['lng']}');
+        $(document).ready(function () {
+          initTencentMap('{$this->id['lat']}{$this->id['lng']}');
+        });
 EOT;
     }
 }
