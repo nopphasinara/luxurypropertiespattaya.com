@@ -97,7 +97,7 @@
     <div class="header-media">
         <div class="banner-parallax">
             <div class="banner-bg-wrap">
-                <div class="banner-inner" style="background-image: url('http://placehold.it/2000x1440')"></div>
+                <div class="banner-inner" style="background-image: url('https://placehold.it/2000x1440')"></div>
             </div>
         </div>
         <div class="banner-caption">
@@ -211,7 +211,7 @@
                                                             <p class="rant">$21,000/mo</p>
                                                         </div>
                                                         <a href="#" class="hover-effect">
-                                                            <img src="http://placehold.it/355x240" alt="thumb">
+                                                            <img src="https://placehold.it/355x240" alt="thumb">
                                                         </a>
                                                     </figure>
                                                 </div>
@@ -257,7 +257,7 @@
                                                             <p class="rant">$21,000/mo</p>
                                                         </div>
                                                         <a href="#" class="hover-effect">
-                                                            <img src="http://placehold.it/355x240" alt="thumb">
+                                                            <img src="https://placehold.it/355x240" alt="thumb">
                                                         </a>
                                                     </figure>
                                                 </div>
@@ -303,7 +303,7 @@
                                                             <p class="rant">$21,000/mo</p>
                                                         </div>
                                                         <a href="#" class="hover-effect">
-                                                            <img src="http://placehold.it/355x240" alt="thumb">
+                                                            <img src="https://placehold.it/355x240" alt="thumb">
                                                         </a>
                                                     </figure>
                                                 </div>
@@ -349,7 +349,7 @@
                                                             <p class="rant">$21,000/mo</p>
                                                         </div>
                                                         <a href="#" class="hover-effect">
-                                                            <img src="http://placehold.it/355x240" alt="thumb">
+                                                            <img src="https://placehold.it/355x240" alt="thumb">
                                                         </a>
                                                     </figure>
                                                 </div>
@@ -395,7 +395,7 @@
                                                             <p class="rant">$21,000/mo</p>
                                                         </div>
                                                         <a href="#" class="hover-effect">
-                                                            <img src="http://placehold.it/355x240" alt="thumb">
+                                                            <img src="https://placehold.it/355x240" alt="thumb">
                                                         </a>
                                                     </figure>
                                                 </div>
@@ -441,7 +441,7 @@
                                                             <p class="rant">$21,000/mo</p>
                                                         </div>
                                                         <a href="#" class="hover-effect">
-                                                            <img src="http://placehold.it/355x240" alt="thumb">
+                                                            <img src="https://placehold.it/355x240" alt="thumb">
                                                         </a>
                                                     </figure>
                                                 </div>
@@ -516,7 +516,7 @@
                                                             <p class="rant">$21,000/mo</p>
                                                         </div>
                                                         <a href="#" class="hover-effect">
-                                                            <img src="http://placehold.it/355x240" alt="thumb">
+                                                            <img src="https://placehold.it/355x240" alt="thumb">
                                                         </a>
                                                     </figure>
                                                 </div>
@@ -562,7 +562,7 @@
                                                             <p class="rant">$21,000/mo</p>
                                                         </div>
                                                         <a href="#" class="hover-effect">
-                                                            <img src="http://placehold.it/355x240" alt="thumb">
+                                                            <img src="https://placehold.it/355x240" alt="thumb">
                                                         </a>
                                                     </figure>
                                                 </div>
@@ -608,7 +608,7 @@
                                                             <p class="rant">$21,000/mo</p>
                                                         </div>
                                                         <a href="#" class="hover-effect">
-                                                            <img src="http://placehold.it/355x240" alt="thumb">
+                                                            <img src="https://placehold.it/355x240" alt="thumb">
                                                         </a>
                                                     </figure>
                                                 </div>
@@ -654,7 +654,7 @@
                                                             <p class="rant">$21,000/mo</p>
                                                         </div>
                                                         <a href="#" class="hover-effect">
-                                                            <img src="http://placehold.it/355x240" alt="thumb">
+                                                            <img src="https://placehold.it/355x240" alt="thumb">
                                                         </a>
                                                     </figure>
                                                 </div>
@@ -700,7 +700,7 @@
                                                             <p class="rant">$21,000/mo</p>
                                                         </div>
                                                         <a href="#" class="hover-effect">
-                                                            <img src="http://placehold.it/355x240" alt="thumb">
+                                                            <img src="https://placehold.it/355x240" alt="thumb">
                                                         </a>
                                                     </figure>
                                                 </div>
@@ -746,7 +746,7 @@
                                                             <p class="rant">$21,000/mo</p>
                                                         </div>
                                                         <a href="#" class="hover-effect">
-                                                            <img src="http://placehold.it/355x240" alt="thumb">
+                                                            <img src="https://placehold.it/355x240" alt="thumb">
                                                         </a>
                                                     </figure>
                                                 </div>
@@ -818,7 +818,7 @@
                                                         <p class="rant">$21,000/mo</p>
                                                     </div>
                                                     <a href="#" class="hover-effect">
-                                                        <img src="http://placehold.it/355x240" alt="thumb">
+                                                        <img src="https://placehold.it/355x240" alt="thumb">
                                                     </a>
                                                 </figure>
                                             </div>
@@ -864,7 +864,7 @@
                                                         <p class="rant">$21,000/mo</p>
                                                     </div>
                                                     <a href="#" class="hover-effect">
-                                                        <img src="http://placehold.it/355x240" alt="thumb">
+                                                        <img src="https://placehold.it/355x240" alt="thumb">
                                                     </a>
                                                 </figure>
                                             </div>

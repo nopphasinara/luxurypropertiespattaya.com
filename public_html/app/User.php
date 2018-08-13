@@ -5,9 +5,6 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-use App\Models\Listing\AffiliateListing;
-use App\Models\Listing\Listing;
-
 class User extends Authenticatable
 {
     use Notifiable;
