@@ -16,7 +16,7 @@ $red: #9D2916;
 $primary: $red;
 
 $link-color-hover: $primary;
-$link-color: lighten($primary, 4%);
+$link-color: lighten($primary, 6%);
 
 body {
 }
@@ -32,6 +32,14 @@ a {
 .header-section-4 {
   .header-right {
     .user {
+      a {
+        color: $link-color-hover;
+
+        &:hover {
+          color: $link-color;
+        }
+      }
+
       .btn {
         color: $link-color;
         border-color: $link-color-hover;

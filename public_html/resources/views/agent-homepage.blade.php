@@ -61,7 +61,8 @@
         </div>
         <div class="header-right">
             <div class="user">
-                <a href="#" class="btn btn-default">Sign In / Affiliate Sign Up</a>
+                <a href="#" class="">Affiliate Sign In</a>
+                <a href="#" class="btn btn-default"><i class="fa fa-trophy"></i> Earn With Us</a>
             </div>
         </div>
     </div>
