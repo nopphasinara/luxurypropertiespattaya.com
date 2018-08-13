@@ -11,6 +11,7 @@ use App\Models\BusinessListing\BusinessCategory;
 use App\Mail\ContactSent;
 use App\Mail\BusinessAdded;
 use App\Models\Pages\Pages;
+use App\User;
 
 use MercurySeries\Flashy\Flashy;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -221,5 +222,18 @@ class PageController extends Controller
       flash()->overlay('<p class="lead pb-2 text-center text-success">Your details has been sent,<br>thank you.</p><div class="px-3"><div class="btn btn-success btn-block btn-sm mb-3" data-dismiss="modal">Close</div></div>', '<h3 class="mt-4 mb-0 text-success text-center w-100"><p class="mb-3"><i class="far fa-5x fa-check-circle"></i></p><p class="mb-1">Success!</p></h3>', ['success']);
 
       return redirect()->back();
+    }
+
+    public function agentBySlug($slug = '')
+    {
+      if (!$slug) return abort(404);
+
+      $user = User::byUsername($slug);
+
+      if (!$user) return abort(404);
+
+      return view('agent-homepage')->with([
+        'user' => $user,
+      ]);
     }
 }

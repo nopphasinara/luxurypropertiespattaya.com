@@ -67,7 +67,7 @@ i {
 
 p {
   margin-bottom: get-value($spacers, 2);
-  
+
   > img {
     margin: .8em 1em;
   }
@@ -89,18 +89,18 @@ ul {
 .dropdown-toggle {
   outline: none !important;
   box-shadow: none !important;
-  
+
   &:hover,
   &:active,
   &:focus {
     outline: none !important;
     box-shadow: none !important;
   }
-  
+
   * {
     outline: none !important;
     box-shadow: none !important;
-    
+
     &:hover,
     &:active,
     &:focus {
@@ -654,27 +654,27 @@ $gallery-carousel-height: 440px;
 
 #navbar-main {
   height: auto;
-  
+
   .navbar-nav,
   .nav-item,
   .nav-link {
     color: $white;
-    
+
     &:hover {
       color: $gold;
     }
   }
-  
+
   .navbar-nav {
     .nav-item {
       @extend .text-nowrap;
-      
+
       &:hover {
         color: $gold;
         background: $navbar-main-item-hover;
       }
     }
-    
+
     > .nav-item {
       > .nav-link,
       > .subnav > .nav-link {
@@ -684,16 +684,16 @@ $gallery-carousel-height: 440px;
         padding-bottom: 1em;
       }
     }
-    
+
     .menu-level-2 {
       .subnav-menu {
         border-left: solid 1px darken($navbar-main-item-hover, 5%);
       }
     }
-    
+
     .subnav {
       position: relative;
-      
+
       .subnav-menu {
         z-index: $zindex-dropdown;
         position: absolute;
@@ -701,15 +701,15 @@ $gallery-carousel-height: 440px;
         color: $gold;
         background: $navbar-main-item-hover;
         min-width: 260px;
-        
+
         .nav-item {
           border-top: solid 1px darken($navbar-main-item-hover, 5%);
-          
+
           &:first-child {
             border-top: solid 1px transparent;
           }
         }
-        
+
         &.showright {
           top: 0;
           bottom: auto;
@@ -734,19 +734,19 @@ $gallery-carousel-height: 440px;
           left: 0;
           right: auto;
         }
-        
+
         .nav-link {
           text-align: left;
           padding-left: 1.2em;
           padding-right: 1.2em;
-          
+
           font-size: $font-size-base;
         }
-        
+
         @include media-breakpoint-down($_expand-breakpoint) {
           position: relative;
           min-width: auto;
-          
+
           &.showright,
           &.showleft,
           &.showdown,
@@ -758,7 +758,7 @@ $gallery-carousel-height: 440px;
           }
         }
       }
-      
+
       &.show {
         > .subnav-menu {
           display: block;
@@ -783,18 +783,20 @@ $gallery-carousel-height: 440px;
     color: $white;
     @extend .text-uppercase;
     cursor: pointer;
-    
+
     &.button-on {
       left: 2.6em;
       background: #0000FE;
     }
-    
+
     &.button-off {
       right: 2.6em;
       background: #D41E1D;
     }
   }
 }
+
+
 
 
 /** Helper Classes

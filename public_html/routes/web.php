@@ -15,6 +15,9 @@ use App\Models\SiteMenu\SiteMenu;
 
 // Homepage
 Route::get('/', 'HomepageController@index')->name('homepage');
+Route::get('/agent/{slug}', 'PageController@agentBySlug')->name('page.agent')->where([
+  'slug' => '[a-zA-Z0-9\-\_\.]+',
+]);
 
 
 Route::get('sitemap', 'PageController@sitemap')->name('sitemap');
