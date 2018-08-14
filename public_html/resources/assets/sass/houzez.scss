@@ -14,6 +14,7 @@ $black: #000;
 $light: #ededed;
 $red: #9D2916;
 $primary: $red;
+$secondary: #707070;
 
 $link-color-hover: $primary;
 $link-color: lighten($primary, 6%);
@@ -123,6 +124,44 @@ a {
   }
 }
 
+.detail-top {
+  .header-detail {
+    padding-top: 50px;
+
+    .listing-address {
+      color: $secondary;
+      // font-size: 14px;
+      // line-height: 14px;
+    }
+  }
+}
+
+.search-inside {
+  background-color: $link-color;
+
+  .min-price-range,
+  .max-price-range {
+    color: $light;
+  }
+
+  .advanced-search {
+    background-color: transparent;
+
+    .form-group {
+      margin-top: 13px;
+    }
+  }
+
+  .advance-btn {
+    background-color: $link-color-hover;
+    border-color: $link-color-hover;
+
+    &:hover {
+      background-color: $link-color;
+    }
+  }
+}
+
 .btn-primary {
   background-color: $link-color;
   border-color: $link-color-hover;
@@ -149,6 +188,68 @@ a {
 
 #section-body {
   padding-bottom: 0;
+}
+
+#google-map {
+  &.listing-map {
+    background-color: $light;
+    height: 600px;
+    margin-top: 40px;
+  }
+}
+
+
+.listing-video {
+  margin-top: 40px;
+
+  iframe {
+    // width: 100%;
+    // max-width: 100%;
+    // height: 480px;
+  }
+}
+
+.section-detail-content {
+  padding-bottom: 40px;
+}
+
+strong,
+b {
+  font-weight: bold;
+}
+
+#sidebar {
+  .list-inline {
+    &.sub-list {
+      > li {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+
+  &.divider-lg {
+    margin: 20px 0;
+  }
+}
+
+#listing-carousel {
+  .carousel-inner {
+    .item {
+      height: 50vh;
+    }
+  }
+}
+
+.detail-block {
+  margin-top: 40px;
 }
 
 
