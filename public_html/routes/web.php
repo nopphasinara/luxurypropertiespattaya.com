@@ -20,6 +20,11 @@ Route::get('/agent/{slug}', 'PageController@agentBySlug')->name('page.agent')->w
   'slug' => '[a-zA-Z0-9\-\_\.]+',
 ]);
 
+Route::get('/agent/{slug}/listing/{listing_slug}', 'PageController@agentListingBySlug')->name('page.agent.listing')->where([
+  'slug' => '[a-zA-Z0-9\-\_\.]+',
+  'listing_slug' => '[a-zA-Z0-9\-\_\.]+',
+]);
+
 
 Route::get('sitemap', 'PageController@sitemap')->name('sitemap');
 

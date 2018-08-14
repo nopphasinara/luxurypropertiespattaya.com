@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Listing;
+use App\Models\Listing\Listing;
 use App\Models\BusinessListing\BusinessListing;
 use App\Models\BusinessListing\BusinessCategory;
 use App\Mail\ContactSent;
@@ -234,6 +234,24 @@ class PageController extends Controller
 
       return view('agent-homepage')->with([
         'user' => $user,
+      ]);
+    }
+
+    public function agentListingBySlug($slug = '', $listing_slug = '')
+    {
+      if (!$slug || !$listing_slug) return abort(404);
+
+      $user = User::byUsername($slug);
+
+      if (!$user) return abort(404);
+
+      $listing = Listing::where('slug', $listing_slug)->first();
+
+      if (!$listing) return abort(404);
+
+      return view('agent-listing-details')->with([
+        'user' => $user,
+        'listing' => $listing,
       ]);
     }
 }
